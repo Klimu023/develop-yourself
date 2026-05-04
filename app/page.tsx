@@ -453,13 +453,13 @@ export default function Home() {
     { name: "Vencidos", value: overdue },
   ];
 
-  const COLORS = ["#22c55e", "#facc15", "#ef4444"];
+  const COLORS = ["#10b981", "#f59e0b", "#f43f5e"];
 
   const statusCellClass = (status: string | undefined) => {
-    if (status === "completed") return "bg-green-500 text-white";
-    if (status === "overdue") return "bg-red-500 text-white";
-    if (status === "pending") return "bg-yellow-400 text-black";
-    return "bg-gray-200 text-black";
+    if (status === "completed") return "bg-emerald-100 text-emerald-700";
+    if (status === "overdue") return "bg-rose-100 text-rose-700";
+    if (status === "pending") return "bg-amber-100 text-amber-700";
+    return "bg-slate-100 text-slate-500";
   };
 
   const statusLabel = (status: string | undefined) => {
@@ -470,37 +470,37 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-100 p-8 text-black">
+    <main className="min-h-screen bg-slate-50 p-8 text-slate-900 font-sans">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-4xl font-bold text-black">
+            <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">
               Develop Yourself
             </h1>
-            <p className="text-black mt-1">
+            <p className="text-slate-500 mt-1 font-medium">
               Industrial Learning Solutions
             </p>
           </div>
 
           <button
             onClick={handleLogout}
-            className="bg-gray-900 text-white px-4 py-2 rounded-lg"
+            className="bg-slate-900 hover:bg-slate-800 transition-colors text-white px-5 py-2.5 rounded-lg shadow-sm font-medium"
           >
             Logout
           </button>
         </div>
 
-        <div className="bg-white p-6 rounded-2xl shadow-sm mb-6">
-          <p className="text-black font-medium">Cumplimiento general</p>
+        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/60 mb-6">
+          <p className="text-slate-500 font-medium text-sm">Cumplimiento general</p>
 
-          <div className="flex items-center gap-4 mt-2">
-            <h2 className="text-4xl font-bold text-black">
+          <div className="flex items-center gap-4 mt-3">
+            <h2 className="text-4xl font-bold text-slate-900 tracking-tight">
               {globalCompliance}%
             </h2>
 
-            <div className="w-full bg-gray-200 rounded-lg h-4">
+            <div className="w-full bg-slate-100 rounded-full h-4 overflow-hidden">
               <div
-                className="bg-green-500 h-4 rounded-lg"
+                className="bg-emerald-500 h-full rounded-full transition-all duration-500"
                 style={{ width: `${globalCompliance}%` }}
               />
             </div>
@@ -508,14 +508,14 @@ export default function Home() {
         </div>
 
         {userRole === "admin" && (
-          <div className="bg-white p-5 rounded-2xl shadow-sm mb-6">
-            <label className="mr-3 font-semibold text-black">
+          <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/60 mb-6 flex items-center">
+            <label className="mr-3 font-medium text-slate-700 text-sm">
               Filtrar por sector:
             </label>
             <select
               value={sectorFilter}
               onChange={(e) => setSectorFilter(e.target.value)}
-              className="border p-2 rounded-lg text-black"
+              className="border border-slate-200 bg-slate-50 p-2 rounded-lg text-slate-900 text-sm focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
             >
               <option value="">Todos los sectores</option>
               {sectors.map((s) => (
@@ -528,29 +528,29 @@ export default function Home() {
         )}
 
         <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-green-100 p-6 rounded-2xl shadow-sm">
-            <p className="text-black font-medium">Completados</p>
-            <h2 className="text-3xl font-bold text-black">
+          <div className="bg-white border border-emerald-100 p-6 rounded-2xl shadow-sm">
+            <p className="text-emerald-600 font-medium text-sm">Completados</p>
+            <h2 className="text-4xl font-bold text-slate-900 mt-2 tracking-tight">
               {completed}
             </h2>
           </div>
 
-          <div className="bg-yellow-100 p-6 rounded-2xl shadow-sm">
-            <p className="text-black font-medium">Pendientes</p>
-            <h2 className="text-3xl font-bold text-black">
+          <div className="bg-white border border-amber-100 p-6 rounded-2xl shadow-sm">
+            <p className="text-amber-600 font-medium text-sm">Pendientes</p>
+            <h2 className="text-4xl font-bold text-slate-900 mt-2 tracking-tight">
               {pending}
             </h2>
           </div>
 
-          <div className="bg-red-100 p-6 rounded-2xl shadow-sm">
-            <p className="text-black font-medium">Vencidos</p>
-            <h2 className="text-3xl font-bold text-black">
+          <div className="bg-white border border-rose-100 p-6 rounded-2xl shadow-sm">
+            <p className="text-rose-600 font-medium text-sm">Vencidos</p>
+            <h2 className="text-4xl font-bold text-slate-900 mt-2 tracking-tight">
               {overdue}
             </h2>
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-2xl shadow-sm mb-8 flex justify-center">
+        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/60 mb-8 flex justify-center">
           <PieChart width={300} height={300}>
             <Pie data={pieData} dataKey="value" outerRadius={100}>
               {pieData.map((_, i) => (
@@ -566,118 +566,130 @@ export default function Home() {
             <div className="mb-6 flex flex-wrap gap-3">
               <button
                 onClick={exportUsers}
-                className="border bg-white px-4 py-2 rounded-lg shadow-sm text-black"
+                className="bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 px-4 py-2 rounded-lg shadow-sm font-medium text-sm transition-colors"
               >
                 Exportar usuarios
               </button>
 
               <button
                 onClick={exportSectors}
-                className="border bg-white px-4 py-2 rounded-lg shadow-sm text-black"
+                className="bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 px-4 py-2 rounded-lg shadow-sm font-medium text-sm transition-colors"
               >
                 Exportar sectores
               </button>
 
               <button
                 onClick={exportAlerts}
-                className="border bg-white px-4 py-2 rounded-lg shadow-sm text-black"
+                className="bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 px-4 py-2 rounded-lg shadow-sm font-medium text-sm transition-colors"
               >
                 Exportar alertas
               </button>
             </div>
 
             {sectorStats.length > 0 && (
-              <div className="bg-white p-6 rounded-2xl shadow-sm mb-8">
-                <h2 className="font-semibold text-xl mb-4 text-black">
+              <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/60 mb-8 overflow-hidden">
+                <h2 className="font-semibold text-xl mb-4 text-slate-900">
                   Cumplimiento por sector
                 </h2>
 
-                <table className="w-full text-sm text-black">
-                  <thead>
-                    <tr className="border-b text-left text-black">
-                      <th className="py-2">Sector</th>
-                      <th>Total</th>
-                      <th>Compliance</th>
-                      <th>Pendientes</th>
-                      <th>Vencidos</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {sectorStats.map((s: any, i) => (
-                      <tr key={i} className="border-b">
-                        <td className="py-3 font-medium">{s.name}</td>
-                        <td>{s.total}</td>
-                        <td>
-                          <div className="w-full bg-gray-200 rounded-lg">
-                            <div
-                              className="bg-green-500 text-white text-xs text-center rounded-lg"
-                              style={{ width: `${s.compliance}%` }}
-                            >
-                              {s.compliance}%
-                            </div>
-                          </div>
-                        </td>
-                        <td>{s.pending}</td>
-                        <td className="text-red-600 font-medium">
-                          {s.overdue}
-                        </td>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm text-left">
+                    <thead className="bg-slate-50 text-slate-500 uppercase tracking-wider text-xs font-semibold">
+                      <tr>
+                        <th className="py-3 px-4 rounded-tl-lg">Sector</th>
+                        <th className="py-3 px-4">Total</th>
+                        <th className="py-3 px-4">Compliance</th>
+                        <th className="py-3 px-4">Pendientes</th>
+                        <th className="py-3 px-4 rounded-tr-lg">Vencidos</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100">
+                      {sectorStats.map((s: any, i) => (
+                        <tr key={i} className="hover:bg-slate-50/50 transition-colors">
+                          <td className="py-4 px-4 font-medium text-slate-900">{s.name}</td>
+                          <td className="py-4 px-4 text-slate-600">{s.total}</td>
+                          <td className="py-4 px-4">
+                            <div className="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
+                              <div
+                                className="bg-emerald-500 text-white text-[10px] flex items-center justify-center font-bold h-full transition-all"
+                                style={{ width: `${s.compliance}%` }}
+                              >
+                                {s.compliance > 15 ? `${s.compliance}%` : ''}
+                              </div>
+                            </div>
+                          </td>
+                          <td className="py-4 px-4 text-amber-600 font-medium">{s.pending}</td>
+                          <td className="py-4 px-4 text-rose-600 font-medium">
+                            {s.overdue}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             )}
 
             {alerts.length > 0 && (
-              <div className="bg-white p-6 rounded-2xl shadow-sm mb-8">
-                <h2 className="font-semibold text-xl mb-4 text-black">
+              <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/60 mb-8">
+                <h2 className="font-semibold text-xl mb-4 text-slate-900">
                   Alertas de vencimiento
                 </h2>
 
-                {alerts.map((a, i) => (
-                  <div
-                    key={i}
-                    className={`p-4 mb-3 rounded-xl border-l-4 ${
-                      a.type === "overdue"
-                        ? "bg-red-50 border-red-500 text-black"
-                        : "bg-yellow-50 border-yellow-500 text-black"
-                    }`}
-                  >
-                    <p className="font-semibold">
-                      {a.type === "overdue" ? "🔴 Vencido" : "🟡 Por vencer"}
-                    </p>
-                    <p>👤 {a.user}</p>
-                    <p>📚 {a.course}</p>
-                    <p>📅 {new Date(a.date).toLocaleDateString()}</p>
-                  </div>
-                ))}
+                <div className="space-y-3">
+                  {alerts.map((a, i) => (
+                    <div
+                      key={i}
+                      className={`p-4 rounded-xl border flex items-center gap-4 ${
+                        a.type === "overdue"
+                          ? "bg-rose-50/50 border-rose-100 border-l-4 border-l-rose-500 text-rose-900"
+                          : "bg-amber-50/50 border-amber-100 border-l-4 border-l-amber-500 text-amber-900"
+                      }`}
+                    >
+                      <div className="text-2xl">
+                        {a.type === "overdue" ? "🔴" : "🟡"}
+                      </div>
+                      <div>
+                        <p className="font-semibold text-sm">
+                          {a.type === "overdue" ? "Vencido" : "Por vencer"}
+                        </p>
+                        <p className="text-sm mt-1">
+                          <span className="font-medium">{a.user}</span> • {a.course}
+                        </p>
+                        <p className="text-xs mt-1 opacity-80">
+                          Vence: {new Date(a.date).toLocaleDateString()}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
 
             <div className="grid md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-white p-6 rounded-2xl shadow-sm">
-                <h2 className="font-semibold mb-4 text-black">Invitar usuario</h2>
+              <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/60 flex flex-col">
+                <h2 className="font-semibold text-lg mb-4 text-slate-900">Invitar usuario</h2>
                 <input
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="email"
-                  className="border p-2 rounded-lg w-full mb-3 text-black"
+                  placeholder="ejemplo@email.com"
+                  className="bg-slate-50 border border-slate-200 p-2.5 rounded-lg w-full mb-4 text-sm text-slate-900 focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
                 />
                 <button
                   onClick={handleInvite}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-lg w-full"
+                  className="mt-auto bg-indigo-600 hover:bg-indigo-700 transition-colors text-white font-medium px-4 py-2.5 rounded-lg w-full shadow-sm"
                 >
                   Invitar
                 </button>
               </div>
 
-              <div className="bg-white p-6 rounded-2xl shadow-sm">
-                <h2 className="font-semibold mb-4 text-black">Asignar curso</h2>
+              <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/60 flex flex-col">
+                <h2 className="font-semibold text-lg mb-4 text-slate-900">Asignar curso</h2>
                 <select
                   onChange={(e) => setSelectedUser(e.target.value)}
-                  className="border p-2 rounded-lg w-full mb-3 text-black"
+                  className="bg-slate-50 border border-slate-200 p-2.5 rounded-lg w-full mb-3 text-sm text-slate-900 focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
                 >
-                  <option value="">Usuario</option>
+                  <option value="">Seleccionar usuario...</option>
                   {users.map((u) => (
                     <option key={u.id} value={u.id}>
                       {u.full_name}
@@ -687,9 +699,9 @@ export default function Home() {
 
                 <select
                   onChange={(e) => setSelectedCourse(e.target.value)}
-                  className="border p-2 rounded-lg w-full mb-3 text-black"
+                  className="bg-slate-50 border border-slate-200 p-2.5 rounded-lg w-full mb-4 text-sm text-slate-900 focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
                 >
-                  <option value="">Curso</option>
+                  <option value="">Seleccionar curso...</option>
                   {courses.map((c) => (
                     <option key={c.id} value={c.id}>
                       {c.title}
@@ -699,19 +711,19 @@ export default function Home() {
 
                 <button
                   onClick={assignCourse}
-                  className="bg-green-600 text-white px-4 py-2 rounded-lg w-full"
+                  className="mt-auto bg-emerald-600 hover:bg-emerald-700 transition-colors text-white font-medium px-4 py-2.5 rounded-lg w-full shadow-sm"
                 >
                   Asignar curso
                 </button>
               </div>
 
-              <div className="bg-white p-6 rounded-2xl shadow-sm">
-                <h2 className="font-semibold mb-4 text-black">Asignar paquete</h2>
+              <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/60 flex flex-col">
+                <h2 className="font-semibold text-lg mb-4 text-slate-900">Asignar paquete</h2>
                 <select
                   onChange={(e) => setSelectedUser(e.target.value)}
-                  className="border p-2 rounded-lg w-full mb-3 text-black"
+                  className="bg-slate-50 border border-slate-200 p-2.5 rounded-lg w-full mb-3 text-sm text-slate-900 focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
                 >
-                  <option value="">Usuario</option>
+                  <option value="">Seleccionar usuario...</option>
                   {users.map((u) => (
                     <option key={u.id} value={u.id}>
                       {u.full_name}
@@ -721,9 +733,9 @@ export default function Home() {
 
                 <select
                   onChange={(e) => setSelectedPackage(e.target.value)}
-                  className="border p-2 rounded-lg w-full mb-3 text-black"
+                  className="bg-slate-50 border border-slate-200 p-2.5 rounded-lg w-full mb-4 text-sm text-slate-900 focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
                 >
-                  <option value="">Paquete</option>
+                  <option value="">Seleccionar paquete...</option>
                   {packages.map((p) => (
                     <option key={p.id} value={p.id}>
                       {p.name}
@@ -733,22 +745,22 @@ export default function Home() {
 
                 <button
                   onClick={assignPackage}
-                  className="bg-purple-600 text-white px-4 py-2 rounded-lg w-full"
+                  className="mt-auto bg-purple-600 hover:bg-purple-700 transition-colors text-white font-medium px-4 py-2.5 rounded-lg w-full shadow-sm"
                 >
                   Asignar paquete
                 </button>
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl shadow-sm mb-8">
-              <h2 className="font-semibold mb-4 text-black">Asignar a sector</h2>
+            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/60 mb-8">
+              <h2 className="font-semibold text-lg mb-4 text-slate-900">Asignar a sector completo</h2>
 
               <div className="grid md:grid-cols-3 gap-4">
                 <select
                   onChange={(e) => setSelectedSector(e.target.value)}
-                  className="border p-2 rounded-lg text-black"
+                  className="bg-slate-50 border border-slate-200 p-2.5 rounded-lg text-sm text-slate-900 focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
                 >
-                  <option value="">Sector</option>
+                  <option value="">Seleccionar sector...</option>
                   {sectors.map((s) => (
                     <option key={s.id} value={s.id}>
                       {s.name}
@@ -758,9 +770,9 @@ export default function Home() {
 
                 <select
                   onChange={(e) => setSelectedCourse(e.target.value)}
-                  className="border p-2 rounded-lg text-black"
+                  className="bg-slate-50 border border-slate-200 p-2.5 rounded-lg text-sm text-slate-900 focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
                 >
-                  <option value="">Curso</option>
+                  <option value="">Seleccionar curso...</option>
                   {courses.map((c) => (
                     <option key={c.id} value={c.id}>
                       {c.title}
@@ -770,54 +782,55 @@ export default function Home() {
 
                 <button
                   onClick={assignToSector}
-                  className="bg-orange-600 text-white px-4 py-2 rounded-lg"
+                  className="bg-orange-600 hover:bg-orange-700 transition-colors text-white font-medium px-4 py-2.5 rounded-lg shadow-sm"
                 >
                   Asignar a sector
                 </button>
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl shadow-sm">
-              <h2 className="font-semibold text-xl mb-4 text-black">
+            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/60">
+              <h2 className="font-semibold text-xl mb-4 text-slate-900">
                 Matriz de capacitación
               </h2>
 
-              <div className="flex flex-wrap gap-4 text-sm mb-4 text-black">
-                <span>🟢 Cumplida</span>
-                <span>🟡 Pendiente</span>
-                <span>🔴 Vencida</span>
-                <span>⚪ No asignada</span>
+              <div className="flex flex-wrap gap-4 text-sm mb-6 text-slate-600">
+                <span className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-emerald-400"></div> Cumplida</span>
+                <span className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-amber-400"></div> Pendiente</span>
+                <span className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-rose-400"></div> Vencida</span>
+                <span className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-slate-200"></div> No asignada</span>
               </div>
 
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm min-w-[900px] text-black">
-                  <thead>
-                    <tr className="border-b text-left text-black">
-                      <th className="py-2 sticky left-0 bg-white">Usuario</th>
-                      <th className="py-2">Compliance</th>
+              <div className="overflow-x-auto pb-4 border border-slate-100 rounded-xl">
+                <table className="w-full text-sm min-w-[900px] text-left border-collapse">
+                  <thead className="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold border-b border-slate-200">
+                    <tr>
+                      <th className="py-3 px-4 sticky left-0 bg-slate-50 z-10 shadow-[1px_0_0_0_#e2e8f0]">Usuario</th>
+                      <th className="py-3 px-4">Compliance</th>
                       {matrixCourses.map((course: any) => (
-                        <th key={course.id} className="py-2 px-2 text-center">
-                          {course.title}
+                        <th key={course.id} className="py-3 px-2 text-center w-24">
+                          <span className="inline-block transform -rotate-45 origin-left whitespace-nowrap text-[10px] w-8 h-20 translate-x-3 translate-y-6">{course.title}</span>
                         </th>
                       ))}
                     </tr>
                   </thead>
 
-                  <tbody>
+                  <tbody className="divide-y divide-slate-100">
                     {matrixUsers.map((u: any) => (
-                      <tr key={u.id} className="border-b">
-                        <td className="py-3 font-medium sticky left-0 bg-white">
+                      <tr key={u.id} className="hover:bg-slate-50/80 transition-colors">
+                        <td className="py-3 px-4 font-medium text-slate-900 sticky left-0 bg-white shadow-[1px_0_0_0_#e2e8f0]">
                           {u.name}
                         </td>
 
-                        <td className="py-3 min-w-[160px]">
-                          <div className="w-full bg-gray-200 rounded-lg">
-                            <div
-                              className="bg-green-500 text-white text-xs text-center rounded-lg"
-                              style={{ width: `${u.compliance}%` }}
-                            >
-                              {u.compliance}%
+                        <td className="py-3 px-4 min-w-[120px]">
+                          <div className="flex items-center gap-2">
+                            <div className="w-full bg-slate-100 rounded-full h-2">
+                              <div
+                                className="bg-emerald-500 h-2 rounded-full"
+                                style={{ width: `${u.compliance}%` }}
+                              ></div>
                             </div>
+                            <span className="text-xs font-semibold text-slate-600 w-8">{u.compliance}%</span>
                           </div>
                         </td>
 
@@ -828,7 +841,7 @@ export default function Home() {
                             <td key={course.id} className="p-2 text-center">
                               <div
                                 title={statusLabel(status)}
-                                className={`mx-auto h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold ${statusCellClass(
+                                className={`mx-auto h-7 w-7 rounded-full flex items-center justify-center text-xs font-bold transition-transform hover:scale-110 cursor-help ${statusCellClass(
                                   status
                                 )}`}
                               >
@@ -853,13 +866,18 @@ export default function Home() {
         )}
 
         {userRole !== "admin" && (
-          <div className="bg-white p-6 rounded-2xl shadow-sm text-black">
+          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/60 text-slate-900">
             <h2 className="font-semibold text-xl mb-4">Mis cursos</h2>
-            {assignedCourses.map((c) => (
-              <div key={c.id} className="border p-3 mb-2 rounded-lg">
-                {c.courses?.title} - {c.status}
-              </div>
-            ))}
+            <div className="grid gap-3">
+              {assignedCourses.map((c) => (
+                <div key={c.id} className="border border-slate-100 bg-slate-50 p-4 rounded-xl flex justify-between items-center">
+                  <span className="font-medium">{c.courses?.title}</span>
+                  <span className={`px-3 py-1 rounded-full text-xs font-semibold ${statusCellClass(c.status)}`}>
+                    {statusLabel(c.status)}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
